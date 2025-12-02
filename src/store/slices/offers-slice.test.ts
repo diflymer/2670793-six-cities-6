@@ -1,4 +1,6 @@
 import { Offer } from "../../types/offer";
+import { mockOffers } from "../../utils/mock";
+import { fetchOffers } from "../api-actions";
 import { type OffersState } from "./offers-slice";
 import offersReducer, { loadOffers, setOffersLoading } from "./offers-slice";
 
@@ -26,42 +28,7 @@ describe('Offers Slice', () => {
     })
 
     it('should load offers on loadOffers action', () => {
-        const offers: Offer[] = [
-            {
-                id: '1',
-                title: 'Offer 1',
-                type: 'Apartment',
-                price: 100,
-                city: {
-                    name: 'City 1',
-                    location: {
-                        latitude: 1,
-                        longitude: 1,
-                        zoom: 1,
-                    },
-                },
-                location: {
-                    latitude: 1,
-                    longitude: 1,
-                    zoom: 1,
-                },
-                isFavorite: false,
-                isPremium: false,
-                rating: 1,
-                previewImage: 'https://example.com/image.png',
-                bedrooms: 1,
-                maxAdults: 1,
-                description: 'Description 1',
-                goods: ['Good 1', 'Good 2'],
-                host: {
-                    id: 1,
-                    name: 'Host 1',
-                    isPro: false,
-                    avatarUrl: 'https://example.com/avatar.png',
-                },
-                images: ['https://example.com/image.png', 'https://example.com/image.png'],
-            }
-        ];
+        const offers = mockOffers();
 
         const result = offersReducer(initialState, loadOffers(offers));
 
@@ -74,6 +41,33 @@ describe('Offers Slice', () => {
         const result = offersReducer(initialState, setOffersLoading(isOffersLoading));
 
         expect(result.isOffersLoading).toEqual(isOffersLoading);
+    })
+
+    it('should set "isOffersLoading" to "true" with fetchOffers.pending', () => {
+        
+        const result = offersReducer(initialState, fetchOffers.pending);
+
+        expect(result.isOffersLoading).toBe(true);
+    })
+
+    it('should set "isOffersLoading" to "false", and offers with fetchOffers.fullfilled', () => {
+
+        const expectedState = {
+            ...initialState,
+            isOffersLoading: false,
+            offers: mockOffers()
+        };
+        
+        const result = offersReducer(initialState, fetchOffers.fulfilled(expectedState.offers, '', undefined));
+
+        expect(result).toEqual(expectedState);
+    })
+
+    it('should set "isOffersLoading" to "false" with fetchOffers.rejected', () => {
+        
+        const result = offersReducer(initialState, fetchOffers.rejected);
+
+        expect(result.isOffersLoading).toBe(false);
     })
 
 })

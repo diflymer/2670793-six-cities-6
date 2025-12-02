@@ -1,13 +1,13 @@
-import { User } from "../../types/auth";
-import userReducer, {AuthorizationStatus, type UserState, setAuthorizationStatus, setUser } from "./user-slice";
-import  { name, internet, image, datatype }  from 'faker';
+import { mockUser, mockAuthInfo, mockLoginData } from "../../utils/mock";
+import { checkAuth, login } from "../api-actions";
+import userReducer, { AuthorizationStatus, type UserState, setAuthorizationStatus, setUser } from "./user-slice";
 
 describe('User Slice', () => {
 
     const initialState: UserState = {
         authorizationStatus: 'UNKNOWN',
         user: null,
-      };
+    };
 
     it('should return initial state with empty action', () => {
         const emptyAction = { type: '' };
@@ -26,12 +26,7 @@ describe('User Slice', () => {
     })
 
     it('should set user on setUser action', () => {
-        const user: User = {
-            name: name.firstName(),
-            email: internet.email(),
-            avatarUrl: image.avatar(),
-            isPro: datatype.boolean(),
-        }
+        const user = mockUser();
 
         const result = userReducer(initialState, setUser(user));
 
@@ -44,6 +39,55 @@ describe('User Slice', () => {
         const result = userReducer(initialState, setAuthorizationStatus(authorizationStatus));
 
         expect(result.authorizationStatus).toEqual(authorizationStatus);
+    })
+
+    it('should set authorization status and user with checkAuth.fullfilled ', () => {
+        const authInfo = mockAuthInfo();
+        const { token, ...user } = authInfo;
+        const expectedState = {
+            authorizationStatus: 'AUTH',
+            user: user,
+        };
+
+        const result = userReducer(initialState, checkAuth.fulfilled(authInfo, '', undefined));
+
+        expect(result).toEqual(expectedState);
+    })
+
+    it('should set authorization status and user with checkAuth.rejected ', () => {
+        const expectedState = {
+            authorizationStatus: 'NO_AUTH',
+            user: null,
+        };
+
+        const result = userReducer(initialState, checkAuth.rejected);
+
+        expect(result).toEqual(expectedState);
+    })
+
+    it('should set authorization status and user with login.fullfilled ', () => {
+        const authInfo = mockAuthInfo();
+        const loginData = mockLoginData();
+        const { ...user } = authInfo;
+        const expectedState = {
+            authorizationStatus: 'AUTH',
+            user: user,
+        };
+
+        const result = userReducer(initialState, login.fulfilled(authInfo, '', loginData));
+
+        expect(result).toEqual(expectedState);
+    })
+
+    it('should set authorization status and user with login.rejected ', () => {
+        const expectedState = {
+            authorizationStatus: 'NO_AUTH',
+            user: null,
+        };
+
+        const result = userReducer(initialState, login.rejected);
+
+        expect(result).toEqual(expectedState);
     })
 
 })
