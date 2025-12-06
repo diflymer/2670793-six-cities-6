@@ -1,6 +1,10 @@
+import { Action } from "@reduxjs/toolkit";
+import { createAPI } from "../api/api";
 import { AuthInfo, LoginData, User } from "../types/auth";
 import { Offer } from "../types/offer"
 import { name, internet, image, datatype } from 'faker';
+import { ThunkDispatch } from "redux-thunk";
+import { State } from "../types/state";
 
 export const mockOffers = (): Offer[] => {
 
@@ -108,3 +112,7 @@ export const mockLoginData = ():LoginData => {
     }
     return loginData;
 }
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+
+export const extractActionsTypes = (actions: Action<string>[]) => actions.map(({ type }) => type);

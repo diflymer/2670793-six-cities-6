@@ -13,7 +13,7 @@ export const fetchOffers = createAsyncThunk<
     dispatch: AppDispatch;
     extra: AxiosInstance;
   }
->('offers/fetchOffers', async (_arg, { extra: api, dispatch }) => {
+>('offers/fetchOffers', async (_arg, { extra: api }) => {
   // dispatch(setOffersLoading(true));
   // try {
   //   const { data } = await api.get<Offer[]>('/offers');
