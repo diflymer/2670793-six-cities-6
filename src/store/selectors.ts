@@ -2,6 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import type { State } from '../types/state';
 import type { City } from '../types/city';
 import type { Offer } from '../types/offer';
+import type { SortType } from './slices/sort-slice';
 
 // Base selectors
 export const selectCity = (state: State) => state.city.city;
@@ -14,10 +15,33 @@ export const selectAuthorizationStatus = (state: State) => state.user.authorizat
 
 export const selectUser = (state: State) => state.user.user;
 
+export const selectSortType = (state: State) => state.sort.sortType;
+export const selectSortMenuOpen = (state: State) => state.sort.isOpen;
+
 // Memoized selectors
 export const selectOffersByCity = createSelector(
   [selectCity, selectOffers],
   (city: City, offers: Offer[]) => offers.filter((offer) => offer.city.name === city.title)
+);
+
+// Selector for sorted offers by city
+export const selectSortedOffersByCity = createSelector(
+  [selectOffersByCity, selectSortType],
+  (offers: Offer[], sortType: SortType) => {
+    const sortedOffers = [...offers];
+    
+    switch (sortType) {
+      case 'Price: low to high':
+        return sortedOffers.sort((a, b) => a.price - b.price);
+      case 'Price: high to low':
+        return sortedOffers.sort((a, b) => b.price - a.price);
+      case 'Top rated first':
+        return sortedOffers.sort((a, b) => b.rating - a.rating);
+      case 'Popular':
+      default:
+        return sortedOffers;
+    }
+  }
 );
 
 export const selectPointsByCity = createSelector(
