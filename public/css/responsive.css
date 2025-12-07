@@ -1,0 +1,551 @@
+/* Адаптивные стили для мобильных устройств и планшетов */
+
+/* Базовые адаптивные стили */
+@media (max-width: 1143px) {
+  body,
+  html {
+    min-width: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1144px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Планшеты (768px - 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  /* Список городов - всегда видим */
+  .tabs {
+    display: block;
+  }
+
+  .locations {
+    display: block;
+  }
+
+  .locations__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  /* Главная страница - города */
+  .cities__places-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 200px);
+  }
+
+  .cities__places {
+    width: 100%;
+    margin-right: 0;
+    padding-left: 0;
+    min-height: 600px;
+    max-height: calc(100vh - 280px);
+    overflow-y: auto;
+    flex: 1 1 auto;
+    order: 1;
+  }
+
+  .cities__right-section {
+    width: 100%;
+    height: 250px;
+    min-height: 250px;
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  .cities__map {
+    height: 100%;
+  }
+
+  /* Страница предложения */
+  .property__gallery-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .property__gallery {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .property__image-wrapper {
+    width: calc(50% - 1px);
+  }
+
+  .property__image-wrapper:nth-child(3n) {
+    margin-right: 2px;
+  }
+
+  .property__image-wrapper:nth-child(2n) {
+    margin-right: 0;
+  }
+
+  .property__price::before,
+  .property__price::after {
+    display: none;
+  }
+
+  .reviews__form {
+    margin-right: 0;
+    padding-left: 0;
+  }
+
+  .reviews__textarea {
+    width: 100%;
+  }
+
+  .reviews__button-wrapper {
+    flex-direction: column;
+  }
+
+  .reviews__help {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Страница входа */
+  .page--login {
+    width: 100%;
+    background-image: linear-gradient(to bottom, #f5f5f5 50%, transparent 50%),
+      url(../img/amsterdam.jpg);
+    background-position: top left, center top;
+    background-size: 100% 50%, cover;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 1.5),
+    (min-resolution: 144dpi),
+    (min-resolution: 1.5dppx) {
+    .page--login {
+      background-image: linear-gradient(to bottom, #f5f5f5 50%, transparent 50%),
+        url(../img/amsterdam@2x.jpg);
+    }
+  }
+
+  .page__login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login {
+    width: 100%;
+    max-width: 520px;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .login::after {
+    display: none;
+  }
+
+  .locations--login {
+    padding: 0 20px 40px;
+  }
+
+  /* Избранное */
+  .favorites__locations-items {
+    flex-direction: column;
+  }
+
+  .favorites__locations {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .favorites__card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Близкие места */
+  .near-places {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .near-places__list {
+    justify-content: flex-start;
+  }
+
+  .near-places__card {
+    width: calc(50% - 4px);
+  }
+
+  /* Сортировка */
+  .places__options--custom {
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  /* Пустые состояния */
+  .cities__no-places {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .cities__no-places::after {
+    display: none;
+  }
+
+  .cities__status-wrapper {
+    margin-top: 10vh;
+    padding-top: 40px;
+  }
+
+  .favorites__status-wrapper {
+    width: 100%;
+    max-width: 420px;
+    margin-top: 10vh;
+    padding-top: 60px;
+  }
+}
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Шапка */
+  .header__wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 0 0;
+  }
+
+  .header__left {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .header__logo-link {
+    margin-bottom: 10px;
+  }
+
+  .header__nav {
+    margin-top: 0;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .header__nav-item {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .header__nav-item:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .header__nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Главная страница - список городов всегда видим */
+  .tabs {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .locations {
+    display: block;
+  }
+
+  .locations__list {
+    padding: 12px 3px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .locations__item {
+    flex-shrink: 0;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+
+  .cities__places {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: 400px;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+  }
+
+  .places__found {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .places__sorting {
+    margin-bottom: 20px;
+  }
+
+  .cities__places-list {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .cities__card {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .cities__right-section {
+    height: 300px;
+    min-height: 300px;
+  }
+
+  /* Страница предложения */
+  .property__gallery-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .property__gallery {
+    margin-bottom: 20px;
+  }
+
+  .property__gallery::before,
+  .property__gallery::after {
+    display: none;
+  }
+
+  .property__image-wrapper {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 2px;
+  }
+
+  .property__name {
+    font-size: 28px;
+    padding: 0 15px;
+  }
+
+  .property__bookmark-button {
+    position: static;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .property__features {
+    flex-direction: column;
+    margin-left: 0;
+    margin-bottom: 25px;
+  }
+
+  .property__feature {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .property__inside-list {
+    flex-direction: column;
+  }
+
+  .property__inside-item {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .property__map {
+    height: 400px;
+    margin-bottom: 30px;
+  }
+
+  .reviews__item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reviews__user {
+    margin-right: 0;
+    margin-bottom: 10px;
+    max-width: 100%;
+  }
+
+  .reviews__form {
+    padding-left: 0;
+  }
+
+  .reviews__submit {
+    width: 100%;
+  }
+
+  /* Страница входа */
+  .login {
+    padding-top: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .login__title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .login__form {
+    width: 100%;
+  }
+
+  /* Избранное */
+  .favorites {
+    padding: 0 10px 50px;
+  }
+
+  .favorites__title {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .favorites__card {
+    flex-direction: column;
+  }
+
+  .favorites__image-wrapper {
+    width: 100%;
+    min-width: 100%;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  /* Близкие места */
+  .near-places__card {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* Футер */
+  .footer {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  /* Сортировка на мобильных */
+  .places__sorting {
+    padding-left: 0;
+  }
+
+  .places__options--custom {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Пустые состояния на мобильных */
+  .cities__status-wrapper {
+    margin-top: 5vh;
+    padding-top: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .cities__status-description {
+    padding: 0 15px;
+  }
+
+  .favorites__status-wrapper {
+    padding-top: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .favorites__status-description {
+    padding: 0 15px;
+  }
+
+  /* Адаптация форм */
+  .form__input,
+  .form__textarea {
+    font-size: 16px; /* Предотвращаем зум на iOS */
+  }
+}
+
+/* Маленькие мобильные устройства (до 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .places__found {
+    font-size: 18px;
+  }
+
+  .property__name {
+    font-size: 24px;
+  }
+
+  .property__price-value {
+    font-size: 28px;
+  }
+
+  .login__title {
+    font-size: 24px;
+  }
+
+  .favorites__title {
+    font-size: 24px;
+  }
+
+  .cities__status {
+    font-size: 24px;
+  }
+
+  .favorites__status {
+    font-size: 24px;
+  }
+
+  .reviews__title {
+    font-size: 20px;
+  }
+
+  .property__inside-title,
+  .property__host-title {
+    font-size: 20px;
+  }
+
+  /* Дополнительные улучшения для очень маленьких экранов */
+  .cities__status-wrapper {
+    margin-top: 3vh;
+    padding-top: 20px;
+  }
+
+  .favorites__status-wrapper {
+    padding-top: 30px;
+  }
+
+  .page__main--property {
+    padding-bottom: 50px;
+  }
+}
+
+/* Большие экраны - сохраняем оригинальный дизайн */
+@media (min-width: 1144px) {
+  .container {
+    width: 1144px;
+  }
+}
