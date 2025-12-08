@@ -25,16 +25,16 @@ export const offersSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-    .addCase(fetchOffers.pending, (state) => {
-      state.isOffersLoading = true;
-    })
-    .addCase(fetchOffers.fulfilled, (state, action) => {
-      state.isOffersLoading = false;
-      state.offers = action.payload;
-    })
-    .addCase(fetchOffers.rejected, (state) => {
-      state.isOffersLoading = false;
-    })
+      .addCase(fetchOffers.pending, (state) => {
+        state.isOffersLoading = true;
+      })
+      .addCase(fetchOffers.fulfilled, (state, action) => {
+        state.isOffersLoading = false;
+        state.offers = action.payload;
+      })
+      .addCase(fetchOffers.rejected, (state) => {
+        state.isOffersLoading = false;
+      });
   },
 });
 

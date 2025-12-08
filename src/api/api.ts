@@ -7,15 +7,16 @@ const BACKEND_URL = 'https://14.design.htmlacademy.pro/six-cities';
 const REQUEST_TIMEOUT = 5000;
 
 // Lazy getter to avoid circular dependency
-let storeModule: typeof import('../store') | null = null;
+let storeModulePromise: Promise<typeof import('../store')> | null = null;
 
-const getStore = () => {
-  if (!storeModule) {
+const getStore = async () => {
+  if (!storeModulePromise) {
     // Use dynamic import to break circular dependency
     // This will be resolved when the interceptor is actually called
-    storeModule = require('../store') as typeof import('../store');
+    storeModulePromise = import('../store');
   }
-  return storeModule?.store;
+  const storeModule = await storeModulePromise;
+  return storeModule.store;
 };
 
 export const createAPI = (): AxiosInstance => {
@@ -34,11 +35,11 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response: AxiosResponse) => response,
-    (error: AxiosError) => {
+    async (error: AxiosError) => {
       if (error.response?.status === 401) {
         // Access store lazily to break circular dependency
         // The store will be available when this interceptor runs
-        const store = getStore();
+        const store = await getStore();
         if (store) {
           store.dispatch(setAuthorizationStatus('NO_AUTH'));
         }

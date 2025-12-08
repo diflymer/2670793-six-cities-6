@@ -92,8 +92,8 @@ const MainPage: FC = () => {
                 <b className="places__found">{offers.length} places to stay in {city.title}</b>
                 <form className="places__sorting" action="#" method="get" ref={sortMenuRef}>
                   <span className="places__sorting-caption">Sort by</span>{' '}
-                  <span 
-                    className="places__sorting-type" 
+                  <span
+                    className="places__sorting-type"
                     tabIndex={0}
                     onClick={handleSortMenuToggle}
                     onKeyDown={(e) => {

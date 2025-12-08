@@ -29,7 +29,7 @@ export const selectSortedOffersByCity = createSelector(
   [selectOffersByCity, selectSortType],
   (offers: Offer[], sortType: SortType) => {
     const sortedOffers = [...offers];
-    
+
     switch (sortType) {
       case 'Price: low to high':
         return sortedOffers.sort((a, b) => a.price - b.price);
